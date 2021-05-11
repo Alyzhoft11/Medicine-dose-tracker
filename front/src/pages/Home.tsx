@@ -17,7 +17,8 @@ export default function Home() {
 				<div className="flex justify-between w-8/12">
 					<h1 className="text-lg font-bold">Medication</h1>
 					<h1 className="mr-6 text-lg font-bold">Dosage</h1>
-					<h1 className="mr-16 text-lg font-bold">Frequency</h1>
+					<h1 className="text-lg font-bold">Frequency</h1>
+					<h1 className="mr-12 text-lg font-bold">Action</h1>
 				</div>
 			</div>
 			<div className="flex justify-center mt-3">

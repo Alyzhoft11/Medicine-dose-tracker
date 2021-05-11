@@ -9,8 +9,8 @@ export type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
 const VARIANTS = {
 	primary: {
 		base: 'border-transparent text-white focus:outline-none',
-		active: 'bg-green-600 hover:bg-green-500 focus:shadow-outline-indigo focus:border-green-700 active:bg-green-700',
-		disabled: 'bg-green-400',
+		active: 'bg-purple-500 hover:bg-purple-400 focus:shadow-outline-indigo focus:border-purple-700 active:bg-purple-700',
+		disabled: 'bg-purple-400',
 	},
 	default: {
 		base: 'border-gray-300',

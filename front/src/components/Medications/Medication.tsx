@@ -1,3 +1,5 @@
+import Example from '../ui/Menu';
+
 export default function Medication() {
 	return (
 		<div>
@@ -5,6 +7,7 @@ export default function Medication() {
 				<h1 className="ml-2 mr-3 font-bold text-lg ">Ibuprofen</h1>
 				<h1 className="ml-2 mr-3 font-bold text-lg ">2.5 50 mg</h1>
 				<h1 className="ml-2 mr-3 font-bold text-lg ">3 times a day</h1>
+				<Example />
 			</div>
 		</div>
 	);
