@@ -1,7 +1,11 @@
 import { Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 
-export default function Example() {
+type Props = {
+	click: () => void;
+};
+
+export default function ActionMenu({ click }: Props) {
 	return (
 		<div className="mr-10">
 			<Menu as="div" className="relative inline-block text-left">
@@ -17,7 +21,7 @@ export default function Example() {
 						<div className="px-1 py-1">
 							<Menu.Item>
 								{({ active }) => (
-									<button className={`${active ? 'bg-purple-500 text-white' : 'text-gray-900'} group flex rounded-md items-center w-full px-2 py-2 text-sm`}>
+									<button onClick={click} className={`${active ? 'bg-purple-500 text-white' : 'text-gray-900'} group flex rounded-md items-center w-full px-2 py-2 text-sm`}>
 										{active ? <EditActiveIcon className="w-5 h-5 mr-2" aria-hidden="true" /> : <EditInactiveIcon className="w-5 h-5 mr-2" aria-hidden="true" />}
 										Edit
 									</button>
