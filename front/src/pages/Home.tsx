@@ -31,7 +31,7 @@ export default function Home() {
 			</div>
 			<div className="flex justify-center mt-3">
 				<div style={screenHeight} className="w-8/12 overflow-y-auto ">
-					{Meds.map((m) => {
+					{Meds.map((m, i) => {
 						return <Medication click={() => setEditOpen(true)} open={openEdit} close={() => setEditOpen(false)} />;
 					})}
 				</div>
