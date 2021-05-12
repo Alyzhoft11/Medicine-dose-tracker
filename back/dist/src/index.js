@@ -14,24 +14,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const client_1 = require("@prisma/client");
+const auth_1 = require("../src/utils/auth");
 const app = express_1.default();
 const prisma = new client_1.PrismaClient();
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        const allUsers = yield prisma.user.findMany({
-            include: {
-                meds: true,
-            },
-        });
-        console.dir(allUsers, { depth: null });
+        auth_1.authenticateUser('alex@alex.com', 'Test');
     });
 }
-main()
-    .catch((e) => {
-    throw e;
-})
-    .finally(() => __awaiter(void 0, void 0, void 0, function* () {
-    yield prisma.$disconnect();
+app.get('/test', (_, res) => __awaiter(void 0, void 0, void 0, function* () {
+    main()
+        .catch((e) => {
+        throw e;
+    })
+        .finally(() => __awaiter(void 0, void 0, void 0, function* () {
+        yield prisma.$disconnect();
+    }));
 }));
 app.listen(4000, () => {
     console.log('Working');

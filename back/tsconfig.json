@@ -21,7 +21,8 @@
 		"experimentalDecorators": true,
 		"resolveJsonModule": true,
 		"baseUrl": ".",
-		"allowJs": true
+		"allowJs": true,
+		"rootDir": "./"
 	},
 	"exclude": ["node_modules"],
 	"include": ["./src/**/*.tsx", "./src/**/*.ts", "index.ts"]

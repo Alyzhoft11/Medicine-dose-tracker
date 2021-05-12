@@ -1,5 +1,6 @@
 import express from 'express';
 import { PrismaClient } from '@prisma/client';
+import { hashPassword, authenticateUser } from '../src/utils/auth';
 
 const app = express();
 
@@ -8,35 +9,40 @@ const prisma = new PrismaClient();
 async function main() {
 	// await prisma.user.create({
 	// 	data: {
-	// 		name: 'Alex',
-	// 		email: 'alex1@alex.com',
-	// 		meds: {
-	// 			create: {
-	// 				medication: 'ibuprofen',
-	// 				dosage: '2.5',
-	// 				frequency: '3 times a day',
-	// 			},
-	// 		},
+	// 		Name: 'Alex',
+	// 		email: 'alex@alex.com',
+	// 		hashedPassword: await hashPassword('Test'),
 	// 	},
 	// });
+	// const allUsers = await prisma.user.findMany({
+	// 	include: {
+	// 		meds: true,
+	// 	},
+	// });
+	// console.dir(allUsers, { depth: null });
+	// const test = await hassPassword('TEST');
 
-	const allUsers = await prisma.user.findMany({
-		include: {
-			meds: true,
-		},
-	});
-
-	console.dir(allUsers, { depth: null });
+	authenticateUser('alex@alex.com', 'Test');
 }
 
-main()
-	.catch((e) => {
-		throw e;
-	})
+// meds: {
+// 	create: {
+// 		medication: 'ibuprofen',
+// 		dosage: '2.5',
+// 		frequency: '3 times a day',
+// 	},
+// },
 
-	.finally(async () => {
-		await prisma.$disconnect();
-	});
+app.get('/test', async (_, res) => {
+	main()
+		.catch((e) => {
+			throw e;
+		})
+
+		.finally(async () => {
+			await prisma.$disconnect();
+		});
+});
 
 app.listen(4000, () => {
 	console.log('Working');
