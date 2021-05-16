@@ -35,7 +35,16 @@ const authenticateUser = (email, password) => __awaiter(void 0, void 0, void 0, 
         throw new Error('Email not found');
     }
     const status = yield exports.verifyPassword(password, user.hashedPassword);
-    console.log(status);
+    switch (status) {
+        case secure_password_1.default.VALID:
+            break;
+        default:
+            const error = {
+                error: 'Invalid Password',
+            };
+            return error;
+    }
+    return user;
 });
 exports.authenticateUser = authenticateUser;
 //# sourceMappingURL=auth.js.map

@@ -26,5 +26,14 @@ export const authenticateUser = async (email: string, password: string) => {
 
 	const status = await verifyPassword(password, user.hashedPassword);
 
-	console.log(status);
+	switch (status) {
+		case SecurePassword.VALID:
+			break;
+		default:
+			const error = {
+				error: 'Invalid Password',
+			};
+			return error;
+	}
+	return user;
 };
