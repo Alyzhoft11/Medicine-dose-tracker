@@ -18,6 +18,9 @@ export const authenticateUser = async (email: string, password: string) => {
 		where: {
 			email: email,
 		},
+		include: {
+			meds: true,
+		},
 	});
 
 	if (!user || !user.hashedPassword) {

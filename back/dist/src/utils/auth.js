@@ -30,6 +30,9 @@ const authenticateUser = (email, password) => __awaiter(void 0, void 0, void 0, 
         where: {
             email: email,
         },
+        include: {
+            meds: true,
+        },
     });
     if (!user || !user.hashedPassword) {
         throw new Error('Email not found');

@@ -3,13 +3,9 @@ import { signup, login } from '../controller/user';
 
 const router = express.Router();
 
-type loginData = {
-	email: string;
-	password: string;
-};
-
-router.get('/signup', async (req, res) => {
-	const user = await signup();
+router.post('/signup', async (req, res) => {
+	const data: signupData = req.body;
+	const user = await signup(data.email, data.password, data.name);
 	res.json(user);
 });
 
