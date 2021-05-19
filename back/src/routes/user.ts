@@ -1,18 +1,25 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
 import { signup, login } from '../controller/user';
 
 const router = express.Router();
 
-router.post('/signup', async (req, res) => {
+router.post('/signup', async (req: Request, res: Response) => {
 	const data: signupData = req.body;
 	const user = await signup(data.email, data.password, data.name);
-	res.json(user);
+
+	const token = jwt.sign(user, 'Test');
+
+	res.json({ user, token });
 });
 
-router.post('/login', async (req, res) => {
+router.post('/login', async (req: Request, res: Response) => {
 	const data: loginData = req.body;
 	const user = await login(data.email, data.password);
-	res.json(user);
+
+	const token = jwt.sign(user, 'Test');
+
+	res.json({ user, token });
 });
 
 module.exports = router;

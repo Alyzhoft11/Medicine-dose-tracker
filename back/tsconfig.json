@@ -25,5 +25,6 @@
 		"rootDir": "./"
 	},
 	"exclude": ["node_modules"],
-	"include": ["./src/**/*.tsx", "./src/**/*.ts", "index.ts"]
+	"include": ["./src/**/*.tsx", "./src/**/*.ts", "index.ts"],
+	"files": ["types.d.ts"]
 }

@@ -19,7 +19,6 @@ type postData = {
 	medication: string;
 	dosage: string;
 	frequency: string;
-	userId: number;
 };
 
 type deleteData = {
@@ -32,3 +31,7 @@ type putData = {
 	dosage: string;
 	frequency: string;
 };
+
+interface IUserRequest extends Request {
+	user: any;
+}

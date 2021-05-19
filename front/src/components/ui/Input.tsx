@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import Label from './Label';
 
 type Props = InputHTMLAttributes<HTMLInputElement> & {
-	labelText: string;
+	labelText?: string;
 };
 
 export default function Input({ labelText, className, ...props }: Props) {
