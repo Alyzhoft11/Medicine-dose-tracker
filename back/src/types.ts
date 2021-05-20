@@ -12,7 +12,7 @@ type signupData = {
 
 // Meds Types
 type getData = {
-	userId: number;
+	id: number;
 };
 
 type postData = {

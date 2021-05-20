@@ -1,10 +1,10 @@
 import { prisma } from '../utils/prisma';
 
-export async function getMedications(userId: number) {
+export async function getMedications(id: number) {
 	try {
 		const meds = await prisma.medications.findMany({
 			where: {
-				userId,
+				userId: id,
 			},
 		});
 

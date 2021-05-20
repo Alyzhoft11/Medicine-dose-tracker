@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import { useStoreState } from '../store';
+import { useQuery } from 'react-query';
+import axios from 'axios';
 import Medication from '../components/Medications/Medication';
 import Button from '../components/ui/Button';
 import AddModal from '../components/Modals/AddModal';
@@ -8,16 +11,30 @@ const screenHeight = {
 	height: 'calc(100vh - 8.25rem)',
 };
 
-const Meds = Array.from({ length: 20 }, (_, index) => index + 1);
+function useMeds() {
+	return useQuery('getMeds', async () => {
+		const { data } = await axios.get('http://localhost:4000/api/meds', {
+			headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
+		});
+		return data;
+	});
+}
 
 export default function Home() {
 	const [openAdd, setAddOpen] = useState(false);
 	const [openEdit, setEditOpen] = useState(false);
+	const { user } = useStoreState((state) => state.user);
+	const { data } = useMeds();
+
+	console.log(data);
 
 	return (
 		<div>
 			<AddModal open={openAdd} close={() => setAddOpen(false)} />
 			<EditModal open={openEdit} close={() => setEditOpen(false)} />
+			<div className="flex justify-end mt-5 mr-20">
+				<div>{user.email}</div>
+			</div>
 			<div className="flex justify-end mt-5 mr-20">
 				<Button onClick={() => setAddOpen(true)}>Add</Button>
 			</div>
@@ -31,8 +48,8 @@ export default function Home() {
 			</div>
 			<div className="flex justify-center mt-3">
 				<div style={screenHeight} className="w-8/12 overflow-y-auto ">
-					{Meds.map((m, i) => {
-						return <Medication click={() => setEditOpen(true)} open={openEdit} close={() => setEditOpen(false)} />;
+					{data.map((med: any) => {
+						return <Medication Med={med} click={() => setEditOpen(true)} open={openEdit} close={() => setEditOpen(false)} />;
 					})}
 				</div>
 			</div>

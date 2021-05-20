@@ -1,6 +1,7 @@
 import { useState, Dispatch, SetStateAction } from 'react';
 import axios from 'axios';
 import { Link } from '@reach/router';
+import { useStoreActions } from '../store';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 
@@ -11,6 +12,7 @@ type Props = {
 export default function Login({ setLogin }: Props) {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const addUser = useStoreActions((action) => action.user.add);
 
 	const login = async () => {
 		const { data } = await axios.post('http://localhost:4000/api/user/login', {
@@ -20,6 +22,7 @@ export default function Login({ setLogin }: Props) {
 
 		if (data) {
 			localStorage.setItem('Token', data.token);
+			addUser(data.user);
 			setLogin(true);
 		}
 		console.log(data);

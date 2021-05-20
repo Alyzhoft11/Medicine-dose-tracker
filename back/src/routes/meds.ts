@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/', verifyToken, async (req: Request, res: Response) => {
 	const userData: getData = req.user;
 
-	const meds = await getMedications(userData.userId);
+	const meds = await getMedications(userData.id);
 	res.json(meds);
 });
 
