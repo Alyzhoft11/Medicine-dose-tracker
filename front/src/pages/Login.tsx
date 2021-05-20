@@ -1,15 +1,33 @@
-import { useState } from 'react';
+import { useState, Dispatch, SetStateAction } from 'react';
+import axios from 'axios';
+import { Link } from '@reach/router';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 
-export default function Login() {
+type Props = {
+	setLogin: Dispatch<SetStateAction<boolean>>;
+};
+
+export default function Login({ setLogin }: Props) {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
+	const login = async () => {
+		const { data } = await axios.post('http://localhost:4000/api/user/login', {
+			email,
+			password,
+		});
+
+		if (data) {
+			localStorage.setItem('Token', data.token);
+			setLogin(true);
+		}
+		console.log(data);
+	};
+
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		console.log(email);
-		console.log(password);
+		login();
 
 		setEmail('');
 		setPassword('');
@@ -39,9 +57,9 @@ export default function Login() {
 					<div className="flex justify-center mb-5 space-x-2">
 						<p>Don't have an account?</p>
 						<div>
-							<a href="/signup" className="font-medium text-indigo-600 hover:text-indigo-400 hover:underline">
+							<Link to="/signup" className="font-medium text-indigo-600 hover:text-indigo-400 hover:underline">
 								Sign Up
-							</a>
+							</Link>
 						</div>
 					</div>
 				</div>
